@@ -1,0 +1,15 @@
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: kubernetes-scaleout-app-hpa
+  namespace: default
+spec:
+  maxReplicas: 10
+  minReplicas: 1
+  scaleTargetRef:
+    apiVersion: extensions/v1beta1
+    kind: Deployment
+    name: myapp-spring-boot-docker-deployment
+  targetCPUUtilizationPercentage: 30
+
+

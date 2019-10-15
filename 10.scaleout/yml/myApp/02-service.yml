@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: myapp-spring-boot-svc-label
+  name: myapp-spring-boot-service
+  namespace: springboot-prj-myapp
+spec:
+  ports:
+  - nodePort: 30900
+    port: 8080
+    targetPort: 8080
+  selector:
+    app: myapp-spring-boot-labels
+  type: NodePort

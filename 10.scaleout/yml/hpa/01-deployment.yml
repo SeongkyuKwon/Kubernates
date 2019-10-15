@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1                                               
+kind: Deployment                                                       
+metadata:                                                              
+  name: myapp-spring-boot-docker-deployment                            
+  namespace: springboot-prj-myapp
+  labels:                                                              
+    app: myapp-spring-boot-deploy-label                                
+spec:                                                                  
+  replicas: 1                                                          
+  selector:                                                            
+    matchLabels:                                                       
+      app: myapp-spring-boot-labels                                    
+  template:                                                            
+    metadata:                                                          
+      labels:                                                          
+        app: myapp-spring-boot-labels                                  
+    spec:                                                              
+      containers:                                                      
+      - name: myapp-spring-boot-container                              
+        image: privateregistry:5000/myapp
+        ports:                                                         
+        - containerPort: 8080                                          
+        imagePullPolicy: Always                                        
+        resources:                                                     
+          requests:                                                      
+            cpu: 200m                                                
+      imagePullSecrets:                                                
+      - name: private-docker-regcred 
